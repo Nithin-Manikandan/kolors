@@ -34,7 +34,7 @@
     }
 
     /* ─── NAV ─── */
-    nav {
+    #mainNav {
       position: fixed;
       top: 0; left: 0; right: 0;
       z-index: 10000;
@@ -45,7 +45,7 @@
       justify-content: space-between;
       transition: background 0.45s ease, box-shadow 0.45s ease;
     }
-    nav.scrolled {
+    #mainNav.scrolled {
       background: var(--white);
       box-shadow: 0 1px 24px rgba(46,26,16,0.09);
     }
@@ -70,7 +70,7 @@
       opacity: 0.8;
       margin-top: 1px;
     }
-    nav.scrolled .nav-logo { color: var(--espresso); }
+    #mainNav.scrolled .nav-logo { color: var(--espresso); }
 
     .nav-links {
       display: flex;
@@ -88,8 +88,8 @@
       transition: color 0.3s;
     }
     .nav-links a:hover { color: var(--gold-light); }
-    nav.scrolled .nav-links a { color: var(--espresso); }
-    nav.scrolled .nav-links a:hover { color: var(--gold); }
+    #mainNav.scrolled .nav-links a { color: var(--espresso); }
+    #mainNav.scrolled .nav-links a:hover { color: var(--gold); }
 
     .nav-cta {
       font-size: 0.7rem;
@@ -107,11 +107,11 @@
       color: var(--espresso);
       border-color: var(--white);
     }
-    nav.scrolled .nav-cta {
+    #mainNav.scrolled .nav-cta {
       color: var(--espresso);
       border-color: rgba(46,26,16,0.35);
     }
-    nav.scrolled .nav-cta:hover {
+    #mainNav.scrolled .nav-cta:hover {
       background: var(--espresso);
       color: var(--white);
       border-color: var(--espresso);
@@ -133,7 +133,7 @@
       background: var(--white);
       transition: all 0.35s;
     }
-    nav.scrolled .hamburger span { background: var(--espresso); }
+    #mainNav.scrolled .hamburger span { background: var(--espresso); }
     .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .hamburger.open span:nth-child(2) { opacity: 0; }
     .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
