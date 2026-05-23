@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kolors Beauty Salon & Threading — Cumming, GA</title>
+  <meta name="description" content="Kolors Beauty Salon & Threading in Cumming, GA. Expert haircuts, eyebrow threading, facials, and waxing. Women-owned, community-loved, and honestly priced.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream:      #FAF8F5;
+      --blush:      #F4EBE2;
+      --gold:       #B8936A;
+      --gold-light: #D4B48C;
+      --espresso:   #2E1A10;
+      --dark:       #2A1A10;
+      --muted:      #7A6050;
+      --border:     #E8DDD4;
+      --white:      #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      color: var(--dark);
+      background: var(--cream);
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 74px;
+      padding: 0 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.45s ease, box-shadow 0.45s ease;
+    }
+    nav.scrolled {
+      background: var(--white);
+      box-shadow: 0 1px 24px rgba(46,26,16,0.09);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: 0.03em;
+      color: var(--white);
+      text-decoration: none;
+      line-height: 1.15;
+      transition: color 0.45s;
+    }
+    .nav-logo span {
+      display: block;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      font-size: 0.6rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+    nav.scrolled .nav-logo { color: var(--espresso); }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2.8rem;
+      align-items: center;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: rgba(255,255,255,0.88);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    nav.scrolled .nav-links a { color: var(--espresso); }
+    nav.scrolled .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.55);
+      padding: 0.6rem 1.5rem;
+      transition: all 0.3s;
+    }
+    .nav-cta:hover {
+      background: var(--white);
+      color: var(--espresso);
+      border-color: var(--white);
+    }
+    nav.scrolled .nav-cta {
+      color: var(--espresso);
+      border-color: rgba(46,26,16,0.35);
+    }
+    nav.scrolled .nav-cta:hover {
+      background: var(--espresso);
+      color: var(--white);
+      border-color: var(--espresso);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+    }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 1.5px;
+      background: var(--white);
+      transition: all 0.35s;
+    }
+    nav.scrolled .hamburger span { background: var(--espresso); }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* mobile overlay */
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--espresso);
+      z-index: 190;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.8rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    .mobile-overlay.open { opacity: 1; pointer-events: all; }
+    .mobile-overlay a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.3s;
+    }
+    .mobile-overlay a:hover { color: var(--gold-light); }
+    .mobile-overlay .mobile-phone {
+      font-family: 'Jost', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('photos/salon-floor.png');
+      background-size: cover;
+      background-position: center 30%;
+      transform: scale(1.06);
+      transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      will-change: transform;
+    }
+    .hero-bg.loaded { transform: scale(1); }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        160deg,
+        rgba(20,10,5,0.58) 0%,
+        rgba(20,10,5,0.38) 55%,
+        rgba(20,10,5,0.65) 100%
+      );
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 760px;
+      padding: 0 2rem;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 1.8rem;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--gold-light);
+      opacity: 0.65;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 8.5vw, 6rem);
+      font-weight: 300;
+      line-height: 1.06;
+      color: var(--white);
+      letter-spacing: 0.01em;
+      margin-bottom: 1.6rem;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-sub {
+      font-size: 0.75rem;
+      font-weight: 300;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 3rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-gold {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      background: var(--gold);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .btn-gold:hover { background: #9E7A55; transform: translateY(-1px); }
+    .btn-ghost {
+      display: inline-block;
+      padding: 0.9rem 2.4rem;
+      border: 1px solid rgba(255,255,255,0.55);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,0.1);
+      border-color: var(--white);
+    }
+    .scroll-cue {
+      position: absolute;
+      bottom: 2.2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .scroll-cue span {
+      font-size: 0.58rem;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 42px;
+      background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
+      animation: linePulse 2.2s ease-in-out infinite;
+    }
+    @keyframes linePulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); transform-origin: top; }
+      50% { opacity: 0.9; transform: scaleY(1.08); transform-origin: top; }
+    }
+
+    /* ─── TRUST BAR ─── */
+    .trust-bar {
+      background: var(--espresso);
+      padding: 0 5%;
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+    }
+    .trust-item {
+      text-align: center;
+      padding: 2rem 3rem;
+      color: var(--white);
+      flex: 0 0 auto;
+    }
+    .trust-item strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem;
+      font-weight: 400;
+      color: var(--gold-light);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .trust-item span {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .trust-sep {
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+      align-self: stretch;
+      margin: 0.8rem 0;
+    }
+
+    /* ─── GENERIC SECTION HELPERS ─── */
+    .s-label {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.9rem;
+    }
+    .s-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      font-weight: 300;
+      line-height: 1.12;
+      color: var(--espresso);
+      margin-bottom: 1.2rem;
+    }
+    .s-title em { font-style: italic; }
+    .s-lead {
+      font-size: 0.97rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    /* ─── SERVICES ─── */
+    .services {
+      padding: 7rem 5%;
+      background: var(--cream);
+    }
+    .services-head {
+      text-align: center;
+      margin-bottom: 4.5rem;
+    }
+    .services-head .s-lead { max-width: 520px; margin: 0 auto; }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 1160px;
+      margin: 0 auto;
+      border: 1px solid var(--border);
+    }
+    .svc-card {
+      padding: 2.8rem 2.2rem 2.4rem;
+      border-right: 1px solid var(--border);
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow 0.35s;
+    }
+    .svc-card:last-child { border-right: none; }
+    .svc-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .svc-card:hover { box-shadow: 0 8px 40px rgba(46,26,16,0.1); }
+    .svc-card:hover::after { transform: scaleX(1); }
+
+    .svc-icon {
+      width: 44px;
+      height: 44px;
+      color: var(--gold);
+      margin-bottom: 1.8rem;
+      display: block;
+    }
+    .svc-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-weight: 400;
+      color: var(--espresso);
+      line-height: 1.2;
+      margin-bottom: 0.9rem;
+    }
+    .svc-card p {
+      font-size: 0.875rem;
+      font-weight: 300;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 2rem;
+    }
+    .svc-price {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding-top: 1.4rem;
+      border-top: 1px solid var(--border);
+      display: block;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      background: var(--blush);
+    }
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+      height: 620px;
+    }
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      transition: transform 0.8s ease;
+    }
+    .about-photo:hover img { transform: scale(1.03); }
+    .about-badge {
+      position: absolute;
+      bottom: 2.5rem;
+      right: 2.5rem;
+      background: var(--espresso);
+      color: var(--white);
+      padding: 1.1rem 1.4rem;
+      text-align: center;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      line-height: 2;
+    }
+    .about-badge strong {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .about-text {
+      padding: 6rem 7%;
+    }
+    .about-text .s-lead { margin-bottom: 1.2rem; }
+    .about-text .s-lead + .s-lead { margin-bottom: 1.2rem; }
+
+    .about-signature {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .sig-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem;
+      font-style: italic;
+      color: var(--espresso);
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+    .sig-title {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── TESTIMONIALS ─── */
+    .testimonials {
+      background: var(--espresso);
+      padding: 7rem 5%;
+    }
+    .testimonials .s-label { color: var(--gold-light); }
+    .testimonials .s-title { color: var(--white); }
+    .testimonials-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .testimonials-head-text { max-width: 480px; }
+    .google-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: color 0.3s;
+      flex-shrink: 0;
+    }
+    .google-badge:hover { color: var(--gold-light); }
+    .google-badge-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+      font-size: 1rem;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5px;
+      background: rgba(255,255,255,0.07);
+      max-width: 1160px;
+    }
+    .review-card {
+      background: rgba(255,255,255,0.04);
+      padding: 2.5rem 2.2rem;
+      position: relative;
+      transition: background 0.35s;
+    }
+    .review-card:hover { background: rgba(255,255,255,0.08); }
+    .review-mark {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 5rem;
+      line-height: 0.8;
+      color: var(--gold);
+      opacity: 0.3;
+      margin-bottom: 0.6rem;
+      display: block;
+    }
+    .review-stars {
+      display: flex;
+      gap: 2px;
+      color: var(--gold);
+      font-size: 0.8rem;
+      margin-bottom: 1.2rem;
+    }
+    .review-text {
+      font-size: 0.91rem;
+      font-weight: 300;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.78);
+      font-style: italic;
+      margin-bottom: 2rem;
+    }
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .review-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: rgba(184,147,106,0.3);
+      border: 1px solid rgba(184,147,106,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      letter-spacing: 0.04em;
+      flex-shrink: 0;
+    }
+    .review-name {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.06em;
+    }
+    .review-service {
+      font-size: 0.62rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.38);
+      margin-top: 0.15rem;
+    }
+    .reviews-footer {
+      margin-top: 2.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.3);
+    }
+    .reviews-footer a {
+      color: var(--gold-light);
+      text-decoration: none;
+    }
+    .reviews-footer a:hover { text-decoration: underline; }
+
+    /* ─── GALLERY ─── */
+    .gallery {
+      padding: 7rem 5%;
+      background: var(--cream);
+    }
+    .gallery-head {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: 300px 280px;
+      gap: 0.7rem;
+      max-width: 1160px;
+      margin: 0 auto;
+    }
+    .g-item {
+      overflow: hidden;
+      background: var(--blush);
+    }
+    .g-item:nth-child(1) { grid-column: 1 / 6; grid-row: 1 / 2; }
+    .g-item:nth-child(2) { grid-column: 6 / 9; grid-row: 1 / 2; }
+    .g-item:nth-child(3) { grid-column: 9 / 13; grid-row: 1 / 2; }
+    .g-item:nth-child(4) { grid-column: 1 / 5; grid-row: 2 / 3; }
+    .g-item:nth-child(5) { grid-column: 5 / 9; grid-row: 2 / 3; }
+    .g-item:nth-child(6) { grid-column: 9 / 13; grid-row: 2 / 3; }
+
+    .g-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.88) brightness(1.02);
+      transition: transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 0.5s;
+    }
+    .g-item:hover img {
+      transform: scale(1.05);
+      filter: saturate(1.05) brightness(1.02);
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      background: var(--blush);
+    }
+    .contact-info {
+      padding: 7rem 5%;
+    }
+    .contact-info .s-lead {
+      max-width: 100%;
+      margin-bottom: 3rem;
+    }
+    .contact-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .c-item {
+      display: flex;
+      gap: 1.1rem;
+      align-items: flex-start;
+    }
+    .c-icon {
+      width: 19px;
+      height: 19px;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+    .c-label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+    .c-value {
+      font-size: 0.94rem;
+      color: var(--dark);
+      line-height: 1.65;
+    }
+    .c-value a {
+      color: var(--dark);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .c-value a:hover { color: var(--gold); }
+
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    .hours-table td {
+      padding: 0.35rem 0;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .hours-table td:first-child { color: var(--dark); width: 48%; }
+    .hours-table td:last-child { color: var(--muted); text-align: right; }
+    .hours-note {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 0.6rem;
+      display: block;
+    }
+
+    .social-row {
+      display: flex;
+      gap: 0.75rem;
+    }
+    .social-btn {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--espresso);
+      transition: all 0.3s;
+    }
+    .social-btn:hover {
+      background: var(--espresso);
+      border-color: var(--espresso);
+      color: var(--white);
+    }
+    .social-btn svg { width: 16px; height: 16px; }
+
+    .map-wrap {
+      position: sticky;
+      top: 74px;
+      height: calc(100vh - 74px);
+      min-height: 500px;
+    }
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: #180D07;
+      padding: 2.8rem 5%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 400;
+      color: var(--white);
+      letter-spacing: 0.04em;
+    }
+    .footer-nav {
+      display: flex;
+      gap: 2.2rem;
+    }
+    .footer-nav a {
+      font-size: 0.67rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .footer-nav a:hover { color: var(--gold-light); }
+    .footer-copy {
+      font-size: 0.66rem;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up[data-delay="1"] { transition-delay: 0.1s; }
+    .fade-up[data-delay="2"] { transition-delay: 0.2s; }
+    .fade-up[data-delay="3"] { transition-delay: 0.3s; }
+    .fade-up[data-delay="4"] { transition-delay: 0.4s; }
+    .fade-up[data-delay="5"] { transition-delay: 0.5s; }
+    .fade-up[data-delay="6"] { transition-delay: 0.6s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .svc-card { border-bottom: 1px solid var(--border); }
+      .svc-card:nth-child(2) { border-right: none; }
+      .svc-card:nth-child(3),
+      .svc-card:nth-child(4) { border-bottom: none; }
+      .svc-card:nth-child(4) { border-right: none; }
+
+      .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+      }
+      .g-item { grid-column: auto !important; grid-row: auto !important; height: 260px; }
+      .g-item:nth-child(1) { grid-column: span 2 !important; }
+    }
+
+    @media (max-width: 860px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .about { grid-template-columns: 1fr; }
+      .about-photo { height: 360px; }
+      .about-badge { bottom: 1.5rem; right: 1.5rem; }
+      .about-text { padding: 4rem 6%; }
+
+      .contact { grid-template-columns: 1fr; }
+      .map-wrap { position: static; height: 360px; min-height: unset; }
+
+      .trust-sep { display: none; }
+      .trust-bar { flex-wrap: wrap; gap: 0; }
+      .trust-item { padding: 1.4rem 1.8rem; }
+
+      footer { flex-direction: column; text-align: center; }
+      .footer-nav { justify-content: center; }
+    }
+
+    @media (max-width: 600px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .svc-card:nth-child(n) { border-right: none; border-bottom: 1px solid var(--border); }
+      .svc-card:last-child { border-bottom: none; }
+
+      .reviews-grid { grid-template-columns: 1fr; gap: 0; }
+      .review-card { border-bottom: 1px solid rgba(255,255,255,0.07); }
+
+      .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+      .g-item { grid-column: auto !important; grid-row: auto !important; height: 240px; }
+
+      .hero h1 { font-size: 2.8rem; }
+      .testimonials-head { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">
+    Kolors
+    <span>Beauty Salon &amp; Threading</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="tel:+14702971191" class="nav-cta">Call Now</a>
+  <button class="hamburger" id="burger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- mobile overlay -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <a href="#services" class="m-link">Services</a>
+  <a href="#about" class="m-link">About</a>
+  <a href="#gallery" class="m-link">Gallery</a>
+  <a href="#contact" class="m-link">Contact</a>
+  <a href="tel:+14702971191" class="mobile-phone">(470) 297-1191</a>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Cumming, Georgia</div>
+    <h1>Where Every Detail<br><em>Is Taken Care Of</em></h1>
+    <p class="hero-sub">Haircuts &nbsp;·&nbsp; Threading &nbsp;·&nbsp; Facials &nbsp;·&nbsp; Waxing</p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-gold">Explore Services</a>
+      <a href="#contact" class="btn-ghost">Find Us</a>
+    </div>
+  </div>
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ─── TRUST BAR ─── -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <strong>301+</strong>
+    <span>Google Reviews</span>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <strong>4.0 ★</strong>
+    <span>Rated on Google</span>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <strong>Women</strong>
+    <span>Owned &amp; Operated</span>
+  </div>
+  <div class="trust-sep"></div>
+  <div class="trust-item">
+    <strong>Cumming's</strong>
+    <span>Hidden Gem</span>
+  </div>
+</div>
+
+<!-- ─── SERVICES ─── -->
+<section class="services" id="services">
+  <div class="services-head">
+    <div class="s-label fade-up">What We Offer</div>
+    <h2 class="s-title fade-up" data-delay="1">Services Built Around <em>You</em></h2>
+    <p class="s-lead fade-up" data-delay="2">
+      From your first visit to your hundredth, every appointment gets the same care and attention to detail.
+    </p>
+  </div>
+  <div class="services-grid">
+
+    <div class="svc-card fade-up" data-delay="1">
+      <!-- threading icon -->
+      <svg class="svc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M8 20 Q22 10 36 20"/>
+        <path d="M8 24 Q22 14 36 24"/>
+        <line x1="22" y1="10" x2="22" y2="34"/>
+        <circle cx="22" cy="34" r="3"/>
+        <path d="M12 20 Q12 26 17 28"/>
+        <path d="M32 20 Q32 26 27 28"/>
+      </svg>
+      <h3>Eyebrow Threading</h3>
+      <p>Precision brow shaping using the art of threading. Clean, defined arches that frame your face — done in minutes, lasting weeks.</p>
+      <span class="svc-price">Starting at $12</span>
+    </div>
+
+    <div class="svc-card fade-up" data-delay="2">
+      <!-- scissors / cut icon -->
+      <svg class="svc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="4"/>
+        <circle cx="12" cy="32" r="4"/>
+        <line x1="15.5" y1="14" x2="34" y2="30"/>
+        <line x1="15.5" y1="30" x2="34" y2="14"/>
+        <line x1="34" y1="8" x2="34" y2="36"/>
+      </svg>
+      <h3>Haircuts &amp; Styling</h3>
+      <p>Tailored cuts that complement your face shape and life. Kalpana listens to exactly what you want — and delivers every time.</p>
+      <span class="svc-price">Starting at $25</span>
+    </div>
+
+    <div class="svc-card fade-up" data-delay="3">
+      <!-- face / glow icon -->
+      <svg class="svc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="22" cy="22" r="13"/>
+        <path d="M16 28 Q19 32 22 32 Q25 32 28 28"/>
+        <circle cx="17" cy="19" r="1.5" fill="currentColor" stroke="none"/>
+        <circle cx="27" cy="19" r="1.5" fill="currentColor" stroke="none"/>
+        <path d="M22 6 L22 3"/>
+        <path d="M30 9 L32 7"/>
+        <path d="M14 9 L12 7"/>
+        <path d="M36 22 L39 22"/>
+        <path d="M5 22 L8 22"/>
+      </svg>
+      <h3>Facials</h3>
+      <p>Skin-refreshing facials customized to your complexion. We take the time to understand your skin before we begin, so you leave glowing.</p>
+      <span class="svc-price">Starting at $45</span>
+    </div>
+
+    <div class="svc-card fade-up" data-delay="4">
+      <!-- wax / leaf icon -->
+      <svg class="svc-icon" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M22 6 C10 12 10 32 22 38 C34 32 34 12 22 6Z"/>
+        <line x1="22" y1="38" x2="22" y2="42"/>
+        <path d="M16 18 Q22 22 28 18"/>
+        <path d="M15 26 Q22 30 29 26"/>
+      </svg>
+      <h3>Waxing</h3>
+      <p>Smooth, long-lasting results with minimal discomfort. Quality wax formulations for the gentlest possible experience — face and body.</p>
+      <span class="svc-price">Starting at $15</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── ABOUT ─── -->
+<section class="about" id="about">
+  <div class="about-photo fade-up">
+    <img src="photos/salon-reception.png" alt="Kolors Beauty Salon reception area">
+    <div class="about-badge">
+      <strong>♀</strong>
+      Women-Owned<br>&amp; Operated
+    </div>
+  </div>
+  <div class="about-text fade-up" data-delay="2">
+    <div class="s-label">Our Story</div>
+    <h2 class="s-title">A Salon That<br><em>Feels Like Home</em></h2>
+    <p class="s-lead">
+      Kolors Beauty Salon &amp; Threading was built on a simple belief: every person who walks through the door deserves to feel heard, cared for, and confident when they leave.
+    </p>
+    <p class="s-lead" style="margin-top: 1.1rem;">
+      Tucked into the heart of Cumming, we've earned a reputation as a true hidden gem — a place where skilled hands, honest prices, and genuine warmth come together. No rushing, no upselling. Just great work, every time.
+    </p>
+    <p class="s-lead" style="margin-top: 1.1rem;">
+      Proudly women-owned and operated, we believe that's reflected in every service we offer and every relationship we build with the people who trust us with their look.
+    </p>
+    <div class="about-signature">
+      <div class="sig-name">Kalpana</div>
+      <div class="sig-title">Lead Stylist &amp; Owner, Kolors Beauty Salon</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIALS ─── -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-head">
+    <div class="testimonials-head-text">
+      <div class="s-label fade-up">What Clients Say</div>
+      <h2 class="s-title fade-up" data-delay="1">Trusted by the<br><em>Community</em></h2>
+    </div>
+    <a href="https://maps.app.goo.gl/ar8HQdr7XCg6v33bA" target="_blank" rel="noopener" class="google-badge fade-up">
+      <div class="google-badge-stars">★★★★☆</div>
+      4.0 · 301 reviews on Google
+    </a>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card fade-up" data-delay="1">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Kalpana did an amazing job with my layers haircut. She really listened to what I wanted and shaped the layers perfectly. Very professional, patient, and skilled. I walked out feeling so happy with my hair.</p>
+      <div class="review-author">
+        <div class="review-avatar">SA</div>
+        <div>
+          <div class="review-name">Sahana A.</div>
+          <div class="review-service">Haircut</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-up" data-delay="2">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Kalpana and her team are amazing! They do the best threading in Atlanta. Also give amazing haircuts and facials — and so affordable. Really a hidden gem!</p>
+      <div class="review-author">
+        <div class="review-avatar">PE</div>
+        <div>
+          <div class="review-name">Pamela E.</div>
+          <div class="review-service">Eyebrow Threading</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-up" data-delay="3">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">This is my go-to place for waxing! I absolutely love everyone on the team and their professionalism. The prices are unbeatable and I barely feel any pain. Highly recommend!</p>
+      <div class="review-author">
+        <div class="review-avatar">M</div>
+        <div>
+          <div class="review-name">Mansi</div>
+          <div class="review-service">Waxing</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-up" data-delay="1">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">She takes the time to understand what you're looking for and executes it flawlessly. Prompt, skilled, and has a wonderful way of making you feel completely at ease.</p>
+      <div class="review-author">
+        <div class="review-avatar">SM</div>
+        <div>
+          <div class="review-name">Suneetha M.</div>
+          <div class="review-service">Haircut</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-up" data-delay="2">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">Super quick and easy service. Kalpana made my eyebrows look flawlessly defined even with a tight schedule. Overall, a quick and painless 10/10 experience.</p>
+      <div class="review-author">
+        <div class="review-avatar">SV</div>
+        <div>
+          <div class="review-name">Sireesha MV</div>
+          <div class="review-service">Eyebrow Threading</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="review-card fade-up" data-delay="3">
+      <span class="review-mark">"</span>
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">We've been regular customers for threading and haircuts for years. Kalpana is very neat, efficient, and genuinely kind. We always leave happy. Would definitely recommend.</p>
+      <div class="review-author">
+        <div class="review-avatar">JG</div>
+        <div>
+          <div class="review-name">Jeevika G.</div>
+          <div class="review-service">Haircut &amp; Threading</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="reviews-footer fade-up">Based on <a href="https://maps.app.goo.gl/ar8HQdr7XCg6v33bA" target="_blank" rel="noopener">301 Google reviews</a> — thank you to everyone who took the time to share their experience.</p>
+</section>
+
+<!-- ─── GALLERY ─── -->
+<section class="gallery" id="gallery">
+  <div class="gallery-head fade-up">
+    <div class="s-label">Inside Kolors</div>
+    <h2 class="s-title">A Space Made <em>For You</em></h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="g-item fade-up" data-delay="1">
+      <img src="photos/salon-floor.png" alt="Kolors salon styling floor">
+    </div>
+    <div class="g-item fade-up" data-delay="2">
+      <img src="photos/salon-lounge.png" alt="Kolors salon lounge area">
+    </div>
+    <div class="g-item fade-up" data-delay="3">
+      <img src="photos/salon-dryer.png" alt="Private styling station">
+    </div>
+    <div class="g-item fade-up" data-delay="1">
+      <img src="photos/salon-wash.png" alt="Shampoo and wash stations">
+    </div>
+    <div class="g-item fade-up" data-delay="2">
+      <img src="photos/salon-reception.png" alt="Kolors salon reception">
+    </div>
+    <div class="g-item fade-up" data-delay="3">
+      <img src="photos/salon-tools.png" alt="Professional styling tools">
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="s-label fade-up">Come See Us</div>
+    <h2 class="s-title fade-up" data-delay="1">We'd Love to<br><em>Meet You</em></h2>
+    <p class="s-lead fade-up" data-delay="2">
+      Walk-ins are always welcome. Give us a call and we'll plan your visit around your schedule.
+    </p>
+    <div class="contact-list">
+
+      <div class="c-item fade-up" data-delay="1">
+        <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+          <circle cx="12" cy="9" r="2.5"/>
+        </svg>
+        <div>
+          <span class="c-label">Location</span>
+          <div class="c-value">
+            <a href="https://maps.app.goo.gl/ar8HQdr7XCg6v33bA" target="_blank" rel="noopener">
+              5610 Bethelview Rd #800<br>Cumming, GA 30040
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-item fade-up" data-delay="2">
+        <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 011 2.18C1 1.09 1.88.01 2.97.01h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+        <div>
+          <span class="c-label">Phone</span>
+          <div class="c-value"><a href="tel:+14702971191">(470) 297-1191</a></div>
+        </div>
+      </div>
+
+      <div class="c-item fade-up" data-delay="3">
+        <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <div>
+          <span class="c-label">Hours</span>
+          <div class="c-value">
+            <table class="hours-table">
+              <tr><td>Monday – Friday</td><td>10:00 AM – 6:30 PM</td></tr>
+              <tr><td>Saturday</td><td>10:00 AM – 6:30 PM</td></tr>
+              <tr><td>Sunday</td><td>By Appointment</td></tr>
+            </table>
+            <span class="hours-note">Hours may vary — call ahead to confirm.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="c-item fade-up" data-delay="4">
+        <svg class="c-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="2" width="20" height="20" rx="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+        <div>
+          <span class="c-label">Follow Along</span>
+          <div class="social-row" style="margin-top: 0.5rem;">
+            <a href="https://www.instagram.com/kolorsthreading/" target="_blank" rel="noopener" class="social-btn" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/KolorsBeauty/" target="_blank" rel="noopener" class="social-btn" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="map-wrap">
+    <iframe
+      src="https://maps.google.com/maps?q=5610+Bethelview+Rd+%23800+Cumming+GA+30040&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Kolors Beauty Salon on Google Maps"
+      allowfullscreen>
+    </iframe>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Kolors Beauty Salon &amp; Threading</div>
+  <nav class="footer-nav">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#gallery">Gallery</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="footer-copy">&copy; 2026 Kolors Beauty Salon &amp; Threading &mdash; Cumming, GA</div>
+</footer>
+
+<script>
+  // Nav scroll state
+  const nav = document.getElementById('mainNav');
+  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 50);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Hero background + subtle zoom-in on load
+  const heroBg = document.getElementById('heroBg');
+  heroBg.style.backgroundImage = "url('photos/salon-floor.png')";
+  requestAnimationFrame(() => setTimeout(() => heroBg.classList.add('loaded'), 80));
+
+  // Mobile menu
+  const burger = document.getElementById('burger');
+  const overlay = document.getElementById('mobileOverlay');
+  burger.addEventListener('click', () => {
+    const open = overlay.classList.toggle('open');
+    burger.classList.toggle('open', open);
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  overlay.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      overlay.classList.remove('open');
+      burger.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+  fadeEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
